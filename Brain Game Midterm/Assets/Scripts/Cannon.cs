@@ -6,12 +6,12 @@ public class Cannon : MonoBehaviour
 {
     [Header("Set in Inspector")]
     float projectileSpeed = 40f;
-    public GameObject projectilePrefab;
+    public GameObject[] projectiles;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -30,11 +30,23 @@ public class Cannon : MonoBehaviour
         //FIX NOTE: currently comes out of cannon base
         //Need to make it come out of barrel
         if ( Input.GetKeyDown( KeyCode.Space ) ) {
-            TempFire();
+            //TempFire();
+        }
+
+        if (Input.GetKeyDown(KeyCode.S)){
+            TempFire(projectiles[0]);
+        }
+
+        if (Input.GetKeyDown(KeyCode.D)){
+            TempFire(projectiles[1]);
+        }
+
+        if (Input.GetKeyDown(KeyCode.F)){
+            TempFire(projectiles[2]);
         }
     }
 
-    void TempFire() {
+    void TempFire(GameObject projectilePrefab) {
         GameObject projGO = Instantiate<GameObject>(projectilePrefab);
         projGO.transform.position = transform.position;
         Rigidbody rigidB = projGO.GetComponent<Rigidbody>();
