@@ -10,7 +10,7 @@ public class Projectile : MonoBehaviour
         bndCheck = GetComponent<BoundsCheck>();
     }
     void Update () {
-        if (bndCheck.offUp) {
+        if (bndCheck.offUp || bndCheck.offLeft || bndCheck.offRight || bndCheck.offDown) {
             Destroy( gameObject );
         }
     }

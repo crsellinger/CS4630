@@ -7,6 +7,7 @@ public class Cannon : MonoBehaviour
     [Header("Set in Inspector")]
     float projectileSpeed = 40f;
     public GameObject[] projectiles;
+    public Transform barrel;
 
     // Start is called before the first frame update
     void Start()
@@ -29,10 +30,7 @@ public class Cannon : MonoBehaviour
 
         //FIX NOTE: currently comes out of cannon base
         //Need to make it come out of barrel
-        if ( Input.GetKeyDown( KeyCode.Space ) ) {
-            //TempFire();
-        }
-
+        //-----------FIXED IN TEMPFIRE--------------------//
         if (Input.GetKeyDown(KeyCode.S)){
             TempFire(projectiles[0]);
         }
@@ -46,10 +44,12 @@ public class Cannon : MonoBehaviour
         }
     }
 
+    //FIX NOTE: really janky, don't know why, no time
     void TempFire(GameObject projectilePrefab) {
         GameObject projGO = Instantiate<GameObject>(projectilePrefab);
-        projGO.transform.position = transform.position;
+        projGO.transform.position = barrel.transform.position;
+        projGO.transform.rotation = barrel.transform.rotation;
         Rigidbody rigidB = projGO.GetComponent<Rigidbody>();
-        rigidB.velocity = Vector3.up * projectileSpeed;
+        rigidB.AddForce(barrel.transform.up * projectileSpeed, ForceMode.VelocityChange);
     }
 }
