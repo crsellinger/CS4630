@@ -8,6 +8,7 @@ public class Cannon : MonoBehaviour
     float projectileSpeed = 40f;
     public GameObject[] projectiles;
     public Transform barrel;
+    Vector2 mousePos;
 
     // Start is called before the first frame update
     void Start()
@@ -19,18 +20,15 @@ public class Cannon : MonoBehaviour
     void Update()
     {
         GameObject cannon = GameObject.Find("Cannon");
+        
+        //Cannon rotation
+        mousePos = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
+        Vector3 difference = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+        difference.Normalize();
+        float rotation_z = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0f, 0f, rotation_z + -90);
 
-        //Need mouse speed for z angle
-        if (Input.GetAxis("Mouse X") < 0){
-            cannon.transform.Rotate(new Vector3(0,0,1), Space.Self);
-        }
-        else if (Input.GetAxis("Mouse X") > 0){
-            cannon.transform.Rotate(new Vector3(0,0,-1), Space.Self);
-        }
-
-        //FIX NOTE: currently comes out of cannon base
-        //Need to make it come out of barrel
-        //-----------FIXED IN TEMPFIRE--------------------//
+        //Fire inputs
         if (Input.GetKeyDown(KeyCode.S)){
             TempFire(projectiles[0]);
         }

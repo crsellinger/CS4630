@@ -4,7 +4,10 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Projectile
+  - Projectile1
+  - Projectile2
+  - Projectile3
+  - Crate
   layers:
   - Default
   - TransparentFX
