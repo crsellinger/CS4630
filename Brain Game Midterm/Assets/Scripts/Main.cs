@@ -1,31 +1,55 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Main : MonoBehaviour
 {
     static public Main S;                                // A singleton for Main
 
     [Header("Set in Inspector")]
-    public GameObject[]      prefabEnemies;              // Array of Enemy prefabs
+    public GameObject[]      level1_Enemies;              // Array of Enemy prefabs
+    public GameObject[]      level2_Enemies;
+    public GameObject[]      level3_Enemies;
     public float             enemySpawnPerSecond = 0.5f; // # Enemies/second
     public float             enemyDefaultPadding = 1.5f; // Padding for position
 
     private BoundsCheck      bndCheck;
+
+    public Text levelText;
 
     void Awake() {
         S = this;
         // Set bndCheck to reference the BoundsCheck component on this GameObject
         bndCheck = GetComponent<BoundsCheck>();
 
+        levelText = GameObject.Find("Canvas/Level Count").GetComponent<Text>();
+
         // Invoke SpawnEnemy() once (in 2 seconds, based on default values)
-        Invoke( "SpawnEnemy", 1f/enemySpawnPerSecond );                      // a
+        Invoke( "FirstLevelSpawnEnemy", 1f/enemySpawnPerSecond );
     }
 
-    public void SpawnEnemy() {
+    void Update() {
+        if (int.Parse(levelText.text) >= 5){
+            //reset level to new level
+        }
+        // if (int.Parse(levelText.text) >= 10){
+        //     levelText.text = "Level 3";
+        //     SpawnEnemy(level3_Enemies);
+        // }
+        // else if (int.Parse(levelText.text) >= 5){
+        //     levelText.text = "Level 2";
+        //     SpawnEnemy(level2_Enemies);
+        // }
+        // else{
+        //     SpawnEnemy(level1_Enemies);
+        // }
+    }
+
+    public void FirstLevelSpawnEnemy() {
         // Pick a random Enemy prefab to instantiate
-        int ndx = Random.Range(0, prefabEnemies.Length);                     // b
-        GameObject go = Instantiate<GameObject>( prefabEnemies[ ndx ] );     // c
+        int ndx = Random.Range(0, level1_Enemies.Length);                     // b
+        GameObject go = Instantiate<GameObject>( level1_Enemies[ ndx ] );     // c
 
         // Position the Enemy above the screen with a random x position
         float enemyPadding = enemyDefaultPadding;                            // d
@@ -42,6 +66,6 @@ public class Main : MonoBehaviour
         go.transform.position = pos;
 
         // Invoke SpawnEnemy() again
-        Invoke( "SpawnEnemy", 1f/enemySpawnPerSecond );                      // g
+        Invoke( "FirstLevelSpawnEnemy", 1f/enemySpawnPerSecond );                      // g
     }
 }

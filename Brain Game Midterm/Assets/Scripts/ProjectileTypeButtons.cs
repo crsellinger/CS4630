@@ -5,40 +5,54 @@ using UnityEngine.UI;
 
 public class ProjectileTypeButtons : MonoBehaviour
 {
-    GameObject m;
-    GameObject n;
-    GameObject o;
+    GameObject projType1;
+    GameObject projType2;
+    GameObject projType3;
+
+    GameObject type1Num;
+    GameObject type2Num;
+    GameObject type3Num;
 
     // Start is called before the first frame update
     void Start()
     {
-        m = GameObject.Find("Canvas/ProjectileType1");
-        n = GameObject.Find("Canvas/ProjectileType2");
-        o = GameObject.Find("Canvas/ProjectileType3");
+        projType1 = GameObject.Find("Canvas/ProjectileType1");
+        projType2 = GameObject.Find("Canvas/ProjectileType2");
+        projType3 = GameObject.Find("Canvas/ProjectileType3");
+
+        type1Num = GameObject.Find("Canvas/Shot Number 1");
+        type2Num = GameObject.Find("Canvas/Shot Number 2");
+        type3Num = GameObject.Find("Canvas/Shot Number 3");
     }
 
     // Update is called once per frame
     void Update()
     {
         if (Input.GetKey(KeyCode.S)){
-            m.GetComponent<Text>().color = Color.green;
+            projType1.GetComponent<Text>().color = Color.green;
+            type1Num.GetComponent<Text>().color = Color.green;
         }
         else{
-            m.GetComponent<Text>().color = Color.white;
+            projType1.GetComponent<Text>().color = Color.white;
+            type1Num.GetComponent<Text>().color = Color.white;
         }
 
         if (Input.GetKey(KeyCode.D)){
-            n.GetComponent<Text>().color = Color.green;
+            projType2.GetComponent<Text>().color = Color.green;
+            type2Num.GetComponent<Text>().color = Color.green;
         }
         else{
-            n.GetComponent<Text>().color = Color.white;
+            projType2.GetComponent<Text>().color = Color.white;
+            type2Num.GetComponent<Text>().color = Color.white;
         }
 
         if (Input.GetKey(KeyCode.F)){
-            o.GetComponent<Text>().color = Color.green;
+            projType3.GetComponent<Text>().color = Color.green;
+            type3Num.GetComponent<Text>().color = Color.green;
         }
         else{
-            o.GetComponent<Text>().color = Color.white;
+            projType3.GetComponent<Text>().color = Color.white;
+            type3Num.GetComponent<Text>().color = Color.white;
         }
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Cannon : MonoBehaviour
 {
@@ -10,10 +11,17 @@ public class Cannon : MonoBehaviour
     public Transform barrel;
     Vector2 mousePos;
 
+
+    public Text proj1Text;
+    public Text proj2Text;
+    public Text proj3Text;
+
     // Start is called before the first frame update
     void Start()
     {
-
+        proj1Text = GameObject.Find("Canvas/Shot Number 1").GetComponent<Text>();
+        proj2Text = GameObject.Find("Canvas/Shot Number 2").GetComponent<Text>();
+        proj3Text = GameObject.Find("Canvas/Shot Number 3").GetComponent<Text>();
     }
 
     // Update is called once per frame
@@ -31,14 +39,23 @@ public class Cannon : MonoBehaviour
         //Fire inputs
         if (Input.GetKeyDown(KeyCode.S)){
             TempFire(projectiles[0]);
+            int shotNum = int.Parse(proj1Text.text);
+            shotNum -= 1;
+            proj1Text.text = shotNum.ToString();
         }
 
         if (Input.GetKeyDown(KeyCode.D)){
             TempFire(projectiles[1]);
+            int shotNum = int.Parse(proj2Text.text);
+            shotNum -= 1;
+            proj2Text.text = shotNum.ToString();
         }
 
         if (Input.GetKeyDown(KeyCode.F)){
             TempFire(projectiles[2]);
+            int shotNum = int.Parse(proj3Text.text);
+            shotNum -= 1;
+            proj3Text.text = shotNum.ToString();
         }
     }
 
