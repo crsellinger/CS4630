@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Main : MonoBehaviour
 {
     static public Main S;                                // A singleton for Main
+    static public int finalScore;
 
     [Header("Set in Inspector")]
     public GameObject[]      level1_Enemies;              // Array of Enemy prefabs
@@ -30,6 +32,13 @@ public class Main : MonoBehaviour
     }
 
     void Update() {
+        if (TimerController.instance.timeCounter.text.ToString() == "Time: 01:00.00"){
+            TimerController.instance.EndTimer();
+            finalScore = int.Parse(GameObject.Find("Canvas/Score Count").GetComponent<Text>().text);
+            SceneManager.LoadScene( "EndScene");
+            //Restart();
+        }
+
         if (int.Parse(levelText.text) >= 5){
             //reset level to new level
         }
@@ -67,5 +76,10 @@ public class Main : MonoBehaviour
 
         // Invoke SpawnEnemy() again
         Invoke( "FirstLevelSpawnEnemy", 1f/enemySpawnPerSecond );                      // g
+    }
+
+    public void Restart() {
+        // Reload _Scene_0 to restart the game
+        SceneManager.LoadScene( "Scene1");
     }
 }
