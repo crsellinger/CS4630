@@ -58,7 +58,7 @@ public class Main : MonoBehaviour
     public void FirstLevelSpawnEnemy() {
         // Pick a random Enemy prefab to instantiate
         int ndx = Random.Range(0, level1_Enemies.Length);                     // b
-        GameObject go = Instantiate<GameObject>( level1_Enemies[ ndx ] );     // c
+        GameObject go = Instantiate<GameObject>( level3_Enemies[ ndx ] );     // c
 
         // Position the Enemy above the screen with a random x position
         float enemyPadding = enemyDefaultPadding;                            // d
